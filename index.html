@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Windows 11 Professional - Aras Edition</title>
+    <style>
+        :root { --bg: #0067c0; --mica: rgba(255, 255, 255, 0.85); }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { 
+            background: #0067c0 url('https://4kwallpapers.com/images/wallpapers/windows-11-stock-official-blue-background-3840x2160-5630.jpg') center/cover;
+            height: 100vh; overflow: hidden;
+        }
+
+        /* GÖREV ÇUBUĞU */
+        .taskbar {
+            position: fixed; bottom: 0; width: 100%; height: 48px;
+            background: var(--mica); backdrop-filter: blur(25px);
+            display: flex; justify-content: center; align-items: center; z-index: 1000;
+        }
+
+        /* START BUTONU (SVG İLE ÇİZDİM - ASLA KAYBOLMAZ) */
+        .start-btn { width: 32px; height: 32px; cursor: pointer; transition: 0.2s; }
+        .start-btn:hover { transform: scale(1.1); }
+
+        /* MASAÜSTÜ */
+        .desktop { padding: 20px; display: flex; flex-direction: column; gap: 25px; }
+        .win-icon { width: 80px; text-align: center; color: white; cursor: pointer; }
+        .win-icon .box { width: 45px; height: 45px; background: white; margin: 0 auto; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #0067c0; font-size: 20px; }
+        .win-icon span { display: block; margin-top: 5px; font-size: 11px; text-shadow: 1px 1px 2px black; }
+
+        /* BAŞLAT MENÜSÜ */
+        #startMenu {
+            position: fixed; bottom: -600px; left: 50%; transform: translateX(-50%);
+            width: 520px; height: 550px; background: white; border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3); transition: 0.4s cubic-bezier(0.1, 0.9, 0.2, 1);
+            padding: 30px; z-index: 999;
+        }
+        #startMenu.active { bottom: 60px; }
+    </style>
+</head>
+<body onclick="closeStart()">
+
+    <div class="desktop">
+        <div class="win-icon" onclick="openApp('store')">
+            <div class="box">S</div>
+            <span>Store</span>
+        </div>
+        <div class="win-icon" onclick="openApp('pc')">
+            <div class="box">PC</div>
+            <span>Bilgisayarım</span>
+        </div>
+    </div>
+
+    <div id="startMenu" onclick="event.stopPropagation()">
+        <h3 style="color:#333">Sabitlendi</h3>
+        <hr style="margin:15px 0; opacity:0.1">
+        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:20px; text-align:center;">
+             <div style="cursor:pointer" onclick="alert('GTA V Başlatılıyor...')"><div style="background:#444; color:white; padding:10px; border-radius:5px">GTA V</div></div>
+             <div style="cursor:pointer" onclick="alert('PS5 Moduna Geçiliyor...')"><div style="background:#003791; color:white; padding:10px; border-radius:5px">PS5</div></div>
+        </div>
+    </div>
+
+    <div class="taskbar" onclick="event.stopPropagation()">
+        <svg class="start-btn" viewBox="0 0 24 24" onclick="toggleStart()">
+            <path fill="#00adef" d="M0 0h11.5v11.5H0zM12.5 0H24v11.5H12.5zM0 12.5h11.5V24H0zM12.5 12.5H24V24H12.5z"/>
+        </svg>
+    </div>
+
+    <script>
+        function toggleStart() { document.getElementById('startMenu').classList.toggle('active'); }
+        function closeStart() { document.getElementById('startMenu').classList.remove('active'); }
+        function openApp(app) { alert(app + " açılıyor..."); }
+    </script>
+</body>
+</html>
